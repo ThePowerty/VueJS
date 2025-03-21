@@ -21,6 +21,7 @@
 
 <script lang="ts" setup>
 import InputElement from '@/components/InputElement.vue'
+import { login } from '@/services/authenticateUser'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { z } from 'zod'
@@ -65,7 +66,7 @@ const handleLogin = async () => {
       })
     }
 
-    // pegarle al backend
+    await login(formData.value["email"].value, formData.value["password"].value)
 
     router.push('/characters')
   } catch (err) {
