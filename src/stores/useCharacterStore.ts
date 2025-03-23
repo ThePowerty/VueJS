@@ -39,7 +39,10 @@ export const useCharacterStore = defineStore("character", {
         this.characters = new Map<number, Character>([[defaultCharacter.id, defaultCharacter]])
       }
     },
-    async addCharacter(character: Character) {
+    getCharacter(id: number): Character | undefined{
+      return this.characters.get(id)
+    },
+    async addCharacter(character: Omit<Character, 'id'>) {
       try {
         const response = await addCharacter(character)
         const newCharacter = response.data

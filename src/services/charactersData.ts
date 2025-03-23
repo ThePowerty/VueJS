@@ -8,7 +8,7 @@ export const getCharacters = async (): Promise<{ data: Character[] }> => {
   return { data: response.data }
 }
 
-export const addCharacter = async (characterData: Character): Promise<{ data: Character }> => {
+export const addCharacter = async (characterData: Omit<Character, 'id'>): Promise<{ data: Character }> => {
   const response = await apiClient.post(API_URL, characterData)
   return { data: response.data }
 }
