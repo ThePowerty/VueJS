@@ -1,3 +1,5 @@
+import { useAuthStore } from '@/stores/useAuthStore'
+import { useCharacterStore } from '@/stores/useCharacterStore'
 import LoginPage from '@/views/Login/LoginPage.vue'
 import CharactersPage from '@/views/Private/Characters/CharactersPage.vue'
 import RegisterPage from '@/views/Register/RegisterPage.vue'
@@ -16,11 +18,12 @@ const router = createRouter({
 router.beforeEach(async (to, _from, next) => {
   const publicPages = ['Login', 'Register']
   const authRequired = !publicPages.includes(to.name as string)
-
-  const token = localStorage.getItem('token')
+  const authStore = useAuthStore()
+  const token = authStore?.token
 
   if (authRequired) {
-    //TODO: iniciar store
+    const characterStore = useCharacterStore()
+    characterStore.init()
     if(!token) {
       return next({name: 'Login'})
     }

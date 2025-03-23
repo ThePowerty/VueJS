@@ -1,10 +1,16 @@
 <template>
   <div>
     <h1>Personajes de mi lista</h1>
-    <!-- aca iría la lista de personajes -->
+    <CharactersList :characters="characters"/>
   </div>
 </template>
 <script lang="ts" setup>
-// TODO: aca tenemos que traer los datos de los personajes
+import { useCharacterStore } from '@/stores/useCharacterStore';
+import { computed } from 'vue';
+import CharactersList from './CharacterList/CharactersList.vue';
+
+console.log('Characters')
+const characterStore = useCharacterStore()
+const characters = computed(() => characterStore.formattedCharacters)
 </script>
 <style lang="scss"></style>
